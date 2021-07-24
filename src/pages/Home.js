@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import MainPageLayout from "../components/MainPageLayout";
-
+import { getAPI } from "../misc/Config";
 const Home = () => {
   const [input, setInput] = useState("");
-
+  const [result, setResult] = useState(null);
   const onSearch = () => {
-    fetch(`https://api.tvmaze.com/search/shows?q=${input}`)
-      .then((r) => r.json())
-      .then((results) => {
-        console.log(results);
-      });
+    getAPI(`search/shows?q=${input}`).then((results) => {
+      setResult(results);
+      console.log(results);
+    });
   };
   const inputChange = (ev) => {
     setInput(ev.target.value);
@@ -17,6 +16,22 @@ const Home = () => {
   const onKeyDown = (ev) => {
     if (ev.keyCode === 13) {
       onSearch();
+    }
+  };
+  const renderResult = () => {
+    if (result && result.length === 0) {
+      return <div>No Result Found</div>;
+    }
+    if (result && result.length > 0) {
+      return (
+        <div>
+          {result.map((item) => (
+            <div key={item.show.id}>{item.show.name}</div>
+          ))}
+        </div>
+      );
+    } else {
+      return null;
     }
   };
   return (
@@ -28,6 +43,7 @@ const Home = () => {
         value={input}
       />
       <button onClick={onSearch}>Search</button>
+      {renderResult()}
     </MainPageLayout>
   );
 };

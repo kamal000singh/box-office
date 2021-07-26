@@ -1,10 +1,12 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { StyleApp } from "./components/shows/ShowCard.styled.js";
 import Home from "./pages/Home.js";
+import Show from "./pages/Show.js";
 import Starred from "./pages/Starred.js";
 function App() {
   return (
-    <div>
+    <StyleApp>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -12,9 +14,12 @@ function App() {
         <Route exact path="/starred">
           <Starred />
         </Route>
+        <Route exact path="/show/:id">
+          <Show />
+        </Route>
         <Route>ERROR:404 PAGE</Route>
       </Switch>
-    </div>
+    </StyleApp>
   );
 }
 

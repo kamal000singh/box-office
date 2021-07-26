@@ -29,3 +29,7 @@ export const StyledShowCard = styled(SearchCard)`
     }
   }
 `;
+export const StyleApp = styled.div`
+  /* justify-content: center; */
+  /* text-align: center; */
+`;

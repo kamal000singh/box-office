@@ -3,9 +3,17 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home.js";
 import Show from "./pages/Show.js";
 import Starred from "./pages/Starred.js";
+import { ThemeProvider } from "styled-components";
+const theme = {
+  mainColors: {
+    blue: "#2400ff",
+    gray: "#c6c6c6",
+    dark: "#353535",
+  },
+};
 function App() {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -18,7 +26,7 @@ function App() {
         </Route>
         <Route>ERROR:404 PAGE</Route>
       </Switch>
-    </div>
+    </ThemeProvider>
   );
 }
 
